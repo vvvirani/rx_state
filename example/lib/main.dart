@@ -10,9 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Rx State Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: MyHomePage(title: 'Flutter Rx State Demo Home Page'),
     );
   }
@@ -29,7 +27,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   // int _counter = 0;
+
+  /// [Rx<int>] is a wrapper around int
   Rx<int> _counter = Rx(0);
+
+  RxBool isOn = RxBool(false);
 
   void _incrementCounter() {
     // setState(() {
@@ -41,9 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
+
+      /// Wrap with [RxObservable] to get the [Stream]
+
       body: RxObservable(() {
         return Center(
           child: Column(
@@ -56,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 '$_counter',
                 style: Theme.of(context).textTheme.headline4,
               ),
+              Switch(value: isOn.value, onChanged: isOn),
             ],
           ),
         );
