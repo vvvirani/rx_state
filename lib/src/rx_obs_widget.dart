@@ -1,0 +1,70 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+import 'rx_impl.dart';
+import 'rx_interface.dart';
+
+typedef WidgetCallback = Widget Function();
+
+class RxObservable extends ObservableWidget {
+  final WidgetCallback builder;
+  const RxObservable(this.builder);
+
+  @override
+  Widget build() => builder();
+}
+
+class ObservableValue<T extends RxInterface> extends ObservableWidget {
+  final Widget Function(T) builder;
+  final T data;
+
+  const ObservableValue(this.builder, this.data, {Key? key}) : super(key: key);
+
+  @override
+  Widget build() => builder(data);
+}
+
+abstract class ObservableWidget extends StatefulWidget {
+  const ObservableWidget({Key? key}) : super(key: key);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(ObjectFlagProperty<Function>.has('builder', build));
+  }
+
+  @override
+  _ObservableState createState() => _ObservableState();
+
+  @protected
+  Widget build();
+}
+
+class _ObservableState extends State<ObservableWidget> {
+  final _observer = RxNotifier();
+  late StreamSubscription subs;
+
+  @override
+  void initState() {
+    super.initState();
+    subs = _observer.listen(_updateTree, cancelOnError: false);
+  }
+
+  void _updateTree(_) {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    subs.cancel();
+    _observer.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      RxInterface.notifyChildren(_observer, widget.build);
+}
