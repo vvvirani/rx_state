@@ -1,4 +1,5 @@
-import 'src/rx_impl.dart';
+
+import 'package:rx_state/rx_state.dart';
 
 class RxString extends Rx<String> {
   RxString(String initial) : super(initial);

@@ -12,7 +12,9 @@ class RxObservable extends ObservableWidget {
   const RxObservable(this.builder);
 
   @override
-  Widget build() => builder();
+  Widget build() {
+    return builder();
+  }
 }
 
 class ObservableValue<T extends RxInterface> extends ObservableWidget {
@@ -22,7 +24,9 @@ class ObservableValue<T extends RxInterface> extends ObservableWidget {
   const ObservableValue(this.builder, this.data, {Key? key}) : super(key: key);
 
   @override
-  Widget build() => builder(data);
+  Widget build() {
+    return builder(data);
+  }
 }
 
 abstract class ObservableWidget extends StatefulWidget {
@@ -35,7 +39,9 @@ abstract class ObservableWidget extends StatefulWidget {
   }
 
   @override
-  _ObservableState createState() => _ObservableState();
+  _ObservableState createState() {
+    return _ObservableState();
+  }
 
   @protected
   Widget build();
@@ -65,6 +71,7 @@ class _ObservableState extends State<ObservableWidget> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      RxInterface.notifyChildren(_observer, widget.build);
+  Widget build(BuildContext context) {
+    return RxInterface.notifyChildren(_observer, widget.build);
+  }
 }

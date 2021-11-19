@@ -1,4 +1,4 @@
-import 'src/rx_impl.dart';
+import 'package:rx_state/rx_state.dart';
 
 class RxBool extends Rx<bool> {
   RxBool(bool initial) : super(initial);
@@ -8,8 +8,7 @@ class RxBool extends Rx<bool> {
     return value ? 'true' : 'false';
   }
 
-  Rx<bool> toggle() {
+  void toggle() {
     subject.add(value = !value);
-    return this;
   }
 }

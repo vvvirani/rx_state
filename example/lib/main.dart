@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Rx<int> _counter = Rx(0);
 
   RxBool isOn = RxBool(false);
+
   RxString _text = RxString('Hello World');
 
   void _incrementCounter() {
@@ -70,9 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
+        onPressed: _incrementCounter,
       ),
     );
   }

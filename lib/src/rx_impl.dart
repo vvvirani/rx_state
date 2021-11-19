@@ -5,15 +5,6 @@ import 'rx_stream.dart';
 
 class Rx<T> extends _RxImpl<T> {
   Rx(T initial) : super(initial);
-
-  @override
-  dynamic toJson() {
-    try {
-      return (value as dynamic)?.toJson();
-    } on Exception catch (_) {
-      throw '$T has not method [toJson]';
-    }
-  }
 }
 
 mixin NotifyManager<T> {
@@ -37,13 +28,14 @@ mixin NotifyManager<T> {
     Function? onError,
     void Function()? onDone,
     bool? cancelOnError,
-  }) =>
-      subject.listen(
+  }) {
+    return subject.listen(
         onData,
         onError: onError,
         onDone: onDone,
         cancelOnError: cancelOnError ?? false,
       );
+  }
 
   void close() {
     _subscriptions.forEach((getStream, _subscriptions) {
@@ -73,12 +65,14 @@ mixin RxObjectMixin<T> on NotifyManager<T> {
 
   bool firstRebuild = true;
 
-  String get string => value.toString();
+  String get string {
+    return value.toString();
+  }
 
   @override
-  String toString() => value.toString();
-
-  dynamic toJson() => value;
+  String toString() {
+    return value.toString();
+  }
 
   @override
   bool operator ==(Object o) {
@@ -104,7 +98,9 @@ mixin RxObjectMixin<T> on NotifyManager<T> {
     return _value;
   }
 
-  Stream<T> get stream => subject.stream;
+  Stream<T> get stream {
+    return subject.stream;
+  }
 
   StreamSubscription<T> listenAndPump(void Function(T event) onData,
       {Function? onError, void Function()? onDone, bool? cancelOnError}) {
