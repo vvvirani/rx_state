@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Rx<int> _counter = Rx(0);
 
   RxBool isOn = RxBool(false);
+  RxString _text = RxString('Hello World');
 
   void _incrementCounter() {
     // setState(() {
@@ -53,10 +54,14 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
+                _text.toUpperCase(),
+                style: Theme.of(context).textTheme.headline3,
+              ),
+              Text(
                 'You have pushed the button this many times:',
               ),
               Text(
-                '$_counter',
+                _counter.toString(),
                 style: Theme.of(context).textTheme.headline4,
               ),
               Switch(value: isOn.value, onChanged: isOn),

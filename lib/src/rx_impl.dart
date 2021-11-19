@@ -3,6 +3,19 @@ import 'dart:async';
 import 'rx_interface.dart';
 import 'rx_stream.dart';
 
+class Rx<T> extends _RxImpl<T> {
+  Rx(T initial) : super(initial);
+
+  @override
+  dynamic toJson() {
+    try {
+      return (value as dynamic)?.toJson();
+    } on Exception catch (_) {
+      throw '$T has not method [toJson]';
+    }
+  }
+}
+
 mixin NotifyManager<T> {
   RxStream<T> subject = RxStream<T>();
   final _subscriptions = <RxStream, List<StreamSubscription>>{};
@@ -116,8 +129,8 @@ mixin RxObjectMixin<T> on NotifyManager<T> {
 
 class RxNotifier<T> = RxInterface<T> with NotifyManager<T>;
 
-abstract class RxImpl<T> extends RxNotifier<T> with RxObjectMixin<T> {
-  RxImpl(T initial) {
+abstract class _RxImpl<T> extends RxNotifier<T> with RxObjectMixin<T> {
+  _RxImpl(T initial) {
     _value = initial;
   }
 
