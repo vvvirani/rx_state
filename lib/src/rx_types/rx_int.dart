@@ -1,4 +1,5 @@
-import 'package:rx_state/rx_state.dart';
+import 'package:rx_state/src/rx_core/rx_impl.dart';
+
 
 class RxInt extends Rx<int> {
   RxInt(int initial) : super(initial);
