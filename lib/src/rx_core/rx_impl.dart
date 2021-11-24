@@ -30,11 +30,11 @@ mixin NotifyManager<T> {
     bool? cancelOnError,
   }) {
     return subject.listen(
-        onData,
-        onError: onError,
-        onDone: onDone,
-        cancelOnError: cancelOnError ?? false,
-      );
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError ?? false,
+    );
   }
 
   void close() {
@@ -64,10 +64,6 @@ mixin RxObjectMixin<T> on NotifyManager<T> {
   }
 
   bool firstRebuild = true;
-
-  String get string {
-    return value.toString();
-  }
 
   @override
   String toString() {

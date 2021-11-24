@@ -15,9 +15,11 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Second Page')),
-      body: RxObservable(() {
-        return _buildTodosListView();
-      }),
+      body: RxObservable(
+        builder: () {
+          return _buildTodosListView();
+        },
+      ),
     );
   }
 

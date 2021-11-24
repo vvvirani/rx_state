@@ -1,5 +1,6 @@
-List<Todo> todoFromJson(dynamic data) =>
-    List<Todo>.from(data.map((x) => Todo.fromJson(x)));
+List<Todo> todoFromJson(dynamic data) {
+  return List<Todo>.from(data.map((x) => Todo.fromJson(x)));
+}
 
 class Todo {
   int? userId;

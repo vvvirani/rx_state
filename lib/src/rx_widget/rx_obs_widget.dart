@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import '../rx_core/rx_impl.dart';
-import '../rx_core/rx_interface.dart';
+import 'package:rx_state/src/rx_core/rx_impl.dart';
+import 'package:rx_state/src/rx_core/rx_interface.dart';
 
 typedef WidgetCallback = Widget Function();
 
 class RxObservable extends ObservableWidget {
   final WidgetCallback builder;
-  const RxObservable(this.builder);
+  const RxObservable({required this.builder});
 
   @override
   Widget build() {

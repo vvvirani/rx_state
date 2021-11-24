@@ -23,7 +23,7 @@ abstract class RxInterface<T> {
     final result = builder();
     if (!observer.canUpdate) {
       RxInterface.proxy = _observer;
-      throw '';
+      throw 'Error';
     }
     RxInterface.proxy = _observer;
     return result;
