@@ -22,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Flutter Rx State Demo Home Page')),
-      body: RxObservable(
+      body: RxObserverBuilder(
         builder: () {
           return _dataProvider.isLoading
               ? _buildLoading()

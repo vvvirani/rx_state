@@ -6,9 +6,9 @@ import 'package:rx_state/src/rx_core/rx_interface.dart';
 
 typedef WidgetCallback = Widget Function();
 
-class RxObservable extends ObservableWidget {
+class RxObserverBuilder extends ObservableWidget {
   final WidgetCallback builder;
-  const RxObservable({required this.builder});
+  const RxObserverBuilder({required this.builder});
 
   @override
   Widget build() {
